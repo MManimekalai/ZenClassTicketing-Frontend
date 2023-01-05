@@ -1,12 +1,14 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "./api/login";
 import { config } from "./config";
 import img1 from "./img/zen.png";
+import { UserContext } from "./Usercontext";
 
 // Common Login form for all
 function Login() {
+  const {username,setUsername } = useContext(UserContext);
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -30,18 +32,21 @@ function Login() {
         // Loginn to ADMIN
         if (loginCred.data.role === "ADMIN") {
           localStorage.setItem(`${config.storage_key}`, loginCred.data.token);
+          setUsername({username: loginCred.data.uName});
           navigate("/admin_portal/mentors/list");
         }
 
         // Login to STUDENT
         if (loginCred.data.role === "STUDENT") {
           localStorage.setItem(`${config.storage_key}`, loginCred.data.token);
+          setUsername({username: loginCred.data.uName});
           navigate(`/student_portal/all_query/list/${loginCred.data.uId}`);
         }
 
         // Login to MENTOR
         if (loginCred.data.role === "MENTOR") {
           localStorage.setItem(`${config.storage_key}`, loginCred.data.token);
+          setUsername({username: loginCred.data.uName});
           navigate(`/mentor_portal/all_query/mentor/list/${loginCred.data.uId}`);
         }
       } catch (error) {
