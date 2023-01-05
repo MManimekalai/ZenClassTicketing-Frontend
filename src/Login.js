@@ -31,23 +31,23 @@ function Login() {
 
         // Loginn to ADMIN
         if (loginCred.data.role === "ADMIN") {
-          localStorage.setItem(`${config.storage_key}`, loginCred.data.token);
-          setUsername({username: loginCred.data.uName});
+          localStorage.setItem(`${config.storage_key}`, loginCred.data.token);          
           navigate("/admin_portal/mentors/list");
+          setUsername({username: loginCred.data.uName});
         }
 
         // Login to STUDENT
         if (loginCred.data.role === "STUDENT") {
-          localStorage.setItem(`${config.storage_key}`, loginCred.data.token);
-          setUsername({username: loginCred.data.uName});
+          localStorage.setItem(`${config.storage_key}`, loginCred.data.token);          
           navigate(`/student_portal/all_query/list/${loginCred.data.uId}`);
+          setUsername({username: loginCred.data.uName});
         }
 
         // Login to MENTOR
         if (loginCred.data.role === "MENTOR") {
-          localStorage.setItem(`${config.storage_key}`, loginCred.data.token);
-          setUsername({username: loginCred.data.uName});
+          localStorage.setItem(`${config.storage_key}`, loginCred.data.token);          
           navigate(`/mentor_portal/all_query/mentor/list/${loginCred.data.uId}`);
+          setUsername({username: loginCred.data.uName});
         }
       } catch (error) {
         // console.log(error);
