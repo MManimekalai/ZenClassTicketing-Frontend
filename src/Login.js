@@ -120,8 +120,7 @@ function Login() {
                           value={"Login"}
                           href="index.html"
                           class="btn btn-primary btn-user btn-block"
-                        />
-                          Login
+                        />                         
                        
                       </form>
                     </div>
