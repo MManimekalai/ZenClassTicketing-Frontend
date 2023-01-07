@@ -1,0 +1,10 @@
+Hai Every one, This is Zen Query Ticketing System PFB for some instruction to use 
+my APP.
+
+Please use Below Admin Login credential to sign in admin portl, once you get admin Portal
+you can create your own student list and mentor list with  login credential.
+Then you can use that credential which is created by you in the Add or create mentor/ create student component
+for sign in to get mentor / student_portal access for further usage.
+
+Admin Login credential => email: admin@gmail.com
+                          password: Admin123
