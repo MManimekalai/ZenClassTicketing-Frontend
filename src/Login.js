@@ -1,14 +1,12 @@
 import { useFormik } from "formik";
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "./api/login";
 import { config } from "./config";
 import img1 from "./img/zen.png";
-import { UserContext } from "./Usercontext";
 
 // Common Login form for all
 function Login() {
-  const {username,setUsername } = useContext(UserContext);
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -31,23 +29,25 @@ function Login() {
 
         // Loginn to ADMIN
         if (loginCred.data.role === "ADMIN") {
-          localStorage.setItem(`${config.storage_key}`, loginCred.data.token);          
+          localStorage.setItem(`${config.storage_key}`, loginCred.data.token);
+          localStorage.setItem("un", loginCred.data.uName);
           navigate("/admin_portal/mentors/list");
-          setUsername({username: loginCred.data.uName});
         }
 
         // Login to STUDENT
         if (loginCred.data.role === "STUDENT") {
-          localStorage.setItem(`${config.storage_key}`, loginCred.data.token);          
+          localStorage.setItem(`${config.storage_key}`, loginCred.data.token);
+          localStorage.setItem("un", loginCred.data.uName);
           navigate(`/student_portal/all_query/list/${loginCred.data.uId}`);
-          setUsername({username: loginCred.data.uName});
         }
 
         // Login to MENTOR
         if (loginCred.data.role === "MENTOR") {
-          localStorage.setItem(`${config.storage_key}`, loginCred.data.token);          
-          navigate(`/mentor_portal/all_query/mentor/list/${loginCred.data.uId}`);
-          setUsername({username: loginCred.data.uName});
+          localStorage.setItem(`${config.storage_key}`, loginCred.data.token);
+          localStorage.setItem("un", loginCred.data.uName);
+          navigate(
+            `/mentor_portal/all_query/mentor/list/${loginCred.data.uId}`
+          );
         }
       } catch (error) {
         // console.log(error);
@@ -125,8 +125,7 @@ function Login() {
                           value={"Login"}
                           href="index.html"
                           class="btn btn-primary btn-user btn-block"
-                        />                         
-                       
+                        />
                       </form>
                     </div>
                   </div>

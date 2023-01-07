@@ -1,19 +1,24 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../Usercontext";
 
 // Navbar
 function Navbar() {
-  const { username, setUsername } = useContext(UserContext)
+  const [username, setUsername] = useState();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setUsername(localStorage.getItem("un"));
+  });
+  
   const handleLogout = () => {
+    localStorage.clear();
     navigate("/");
-  }
+  };
   return (
     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
       <h3>Mentor Portal</h3>
       <ul class="navbar-nav ml-auto">
-        <h5 className="username align-right">{username.username}</h5>
+        <h5 className="username align-right">{username}</h5>
         <div class="topbar-divider d-none d-sm-block"></div>
         <button onClick={handleLogout} type="button" class="btn btn-secondary">
           Logout
